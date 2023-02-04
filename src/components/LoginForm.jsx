@@ -1,101 +1,117 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import '../css/LoginFormcss.css'
-import swal from 'sweetalert';
+import React, { useState,useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
+import LoadingScreen from "./LoadingScreen";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
+const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [checkTokenLoading, setCheckTokenLoading] = useState(true);
 
-async function loginUser(credentials) {
-  return fetch('https://www.mecallapi.com/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
-
-function LoginForm() {
-
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
-
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await loginUser({
-      username,
-      password
-    });
-    if ('accessToken' in response) {
-      swal("Success", response.message, "success", {
-        buttons: false,
-        timer: 2000,
-      })
-      .then((value) => {
-        localStorage.setItem('accessToken', response['accessToken']);
-        localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/home";
+    setIsLoading(true);
+    try {
+      const response = await axios.post("http://localhost:8080/login", {
+        username,
+        password,
       });
-    } else {
-      swal("Failed", response.message, "error");
+      if (response.data === "No") {
+        Swal.fire({
+          title: "Error!",
+          text: "Incorrect username or password",
+          type: "error",
+        });
+        setIsError(true);
+      } else {
+        Cookies.set("token", response.data, { expires: 7 });
+        Swal.fire({
+          title: "Success!",
+          text: "You are now logged in",
+          type: "success",
+        });
+        setIsSuccess(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  useEffect(() => {
+    const checkToken = async () => {
+      setCheckTokenLoading(true);
+      const token = Cookies.get("token");
+      if (token) {
+        try {
+          const response = await axios.post(
+            "http://localhost:8080/protected",
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (response.data === "success") {
+            setIsSuccess(true);
+          }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setCheckTokenLoading(false);
+        }
+      } else {
+        setCheckTokenLoading(false);
+      }
+    };
+    checkToken();
+  }, []);
+
+  if (checkTokenLoading) {
+    return <div><LoadingScreen /></div>;
   }
 
+  if (isSuccess) {
+    window.location.href = "/home";
+    return null;
+  }
   return (
-    <div className='wrapper d-flex align-items-center justify-content-center w-100'>
-      <div className='login'>
-      <h2 className='mb-3'>Login</h2>
-      <Form noValidate  onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Form.Group noValidate  onSubmit={handleSubmit} as={Col} md="12" controlId="validationCustom01">
-            <Form.Label>Account</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="Username"
-              onChange={e => {setUserName(e.target.value);
-                }
-              }
-            />
-            <Form.Control.Feedback>
-              Looks good!
-            </Form.Control.Feedback>
-            <Form.Control.Feedback type="invalid">
-              Username cannot be empty!
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="12" controlId="validationCustom02">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              placeholder="Password"
-              onChange={e => setPassword(e.target.value)}
-            />
-            <Form.Control.Feedback>
-              Looks good!
-            </Form.Control.Feedback>
-            <Form.Control.Feedback type="invalid">
-              Password cannot be empty!
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Row>
-        <Form.Group className="mb-3">
-          <Form.Check
-            required
-            label="Agree to terms and conditions"
-            feedback="You must agree before submitting."
-            feedbackType="invalid"
-          />
-        </Form.Group>
-        <Button  className="test" type="submit">Login </Button>
-      </Form>
-      </div>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+        type="submit"
+        disabled={isLoading}
+        style={{
+          backgroundColor: isLoading ? "lightgray" : isSuccess ? "green" : "",
+          transition: "all 0.5s ease-in-out",
+        }}
+      >
+        {isLoading ? "Loading..." : isSuccess ? <FontAwesomeIcon icon={faCheck} />  : "Submit"}
+      </button>
+      </form>
     </div>
   );
-}
+};
 
-export default LoginForm
+export default LoginForm;
