@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Cookies from 'js-cookie'
-import AllNavbar from '../components/AllNavbar';
+import LoginNavbar from '../components/LoginNavbar';
 import "bootstrap/dist/css/bootstrap.css";
 
 function Home() {
@@ -14,7 +14,7 @@ function Home() {
 
   return (
     <>
-      <AllNavbar />
+      <LoginNavbar />
       <h1>OKKKK</h1>
     </>
   )
