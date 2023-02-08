@@ -1,5 +1,5 @@
-.wrapper{
-    height: 90vh;
+.login-bg{
+    height: 100vh;
     background-color: #f04124;
 }
 
@@ -15,26 +15,14 @@
     padding-right: 50px;
 }
 
-
-
-.test:hover{
-    background-color: #f04124;
-    color: white;
-    border: 2px solid #f04124; 
-
-}
-
-.test:focus {
-    background-color: #f04124;
-    box-shadow: inset 0 1px 1px rgba(188, 255, 3, 0.075), 0 0 8px #f04124;
+.OSFillParent {
+    width: 100%;
   }
 
-  .test{
-    background-color: #f04124;
-    border: 2px solid #f04124;
-  }
   
   .btn-primary {
+    background-color: #ef4123 !important;
+    border-color: #ef4123 !important;
     --bs-btn-color: #fff;
     /* --bs-btn-bg: #0d6efd; */
     /* --bs-btn-border-color: #0d6efd; */
@@ -52,12 +40,7 @@
 }
 
 
-.test:active{
-    background-color: #f04124;
-    color: white;
-    border: 2px solid #f04124; 
 
-}
-
-
-
+.swal-button {
+    background-color: #ef4123;
+  }
