@@ -1,16 +1,16 @@
-import './App.css';
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import Home from './page/Home';
-import Landing from './page/Landing';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import LandingPage from "./page/LandingPage";
+import LoginPage from "./page/LoginPage";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/Home" element={<Home />} />
-      </Routes> 
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/Landing" element={<LandingPage />} />
+      </Routes>
     </Router>
   );
 }
