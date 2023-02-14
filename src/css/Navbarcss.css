@@ -23,7 +23,7 @@ a {
 }
 
 .inactive:active{
-  background-color:#f04124;
+  background-color:#f04124!important;
 }
 
 .pointer:hover {
