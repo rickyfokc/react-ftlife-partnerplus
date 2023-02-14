@@ -1,3 +1,32 @@
 a {
   text-decoration: none;
 }
+
+#dropdown-basic {
+  background-color: #ffffff !important;
+ color:#212529!important;
+ -bs-btn-border-color: transparent;
+ border-color: transparent !important;
+ 
+}
+
+#dropdown-basic-unactive {
+  background-color: #ffffff !important;
+ color:#212529!important;
+ -bs-btn-border-color: transparent;
+ border-color: transparent !important;
+}
+
+.active{
+  background-color:transparent !important;
+  color: #f04124!important;
+}
+
+.inactive:active{
+  background-color:#f04124;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+

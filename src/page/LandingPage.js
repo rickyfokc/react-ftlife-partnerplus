@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import CMSNavbar from "../components/CMSNavbar";
+import PlusNavbar from "../components/PlusNavbar";
 import LoadingScreen from "../components/LoadingScreen";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -10,7 +10,7 @@ function LandingPage() {
   const token = Cookies.get("PLUSID");
 
   useEffect(() => {
-    if (false) {
+    if (!token) {
       window.location.href = "/login";
     } else {
       fetch("http://localhost:8080/token", {
@@ -37,8 +37,9 @@ function LandingPage() {
         <LoadingScreen />
       ) : (
         <>
-          <CMSNavbar />
+          <PlusNavbar />
           <h1>Current User: {username}</h1>
+          <h1>Landing Page</h1>
         </>
       )}
     </>

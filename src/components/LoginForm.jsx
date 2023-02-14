@@ -91,13 +91,13 @@ const LoginForm = () => {
   }
 
   if (isRecord) {
-    window.location.href = "/LandingPage";
+    window.location.href = "/Landing";
     return null;
   }
 
   if (isSuccess) {
     setTimeout(() => {
-      window.location.href = "/LandingPage";
+      window.location.href = "/Landing";
     }, 1500);
     return null;
   }

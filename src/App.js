@@ -14,14 +14,16 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/Landing" element={<LandingPage />} />
-        <Route path="/CampaignPage" element={<CampaignPage />} />
-        <Route path="/DocCenterPage" element={<DocCenterPage />} />
-        <Route path="/BrokerComPage" element={<BrokerComPage />} />
-        <Route path="/CategoriesPage" element={<CategoriesPage />} />
-        <Route path="/EventCalendarPage" element={<EventCalendarPage />} />
-        <Route path="/QuickLinksPage" element={<QuickLinksPage />} />
+        <Route path="/Campaign" element={<CampaignPage />} />
+        <Route path="/DocCenter" element={<DocCenterPage />} />
+        <Route path="/BrokerCom" element={<BrokerComPage />} />
+        <Route path="/Categories" element={<CategoriesPage />} />
+        <Route path="/EventCalendar" element={<EventCalendarPage />} />
+        <Route path="/QuickLinks" element={<QuickLinksPage />} />
       </Routes>
     </Router>
   );
