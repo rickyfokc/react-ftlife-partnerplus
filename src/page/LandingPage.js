@@ -37,7 +37,7 @@ function LandingPage() {
         <LoadingScreen />
       ) : (
         <>
-          <PlusNavbar />
+          <PlusNavbar username={username} />
           <h1>Current User: {username}</h1>
           <h1>Landing Page</h1>
         </>
