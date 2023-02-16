@@ -149,7 +149,7 @@ const PlusNavbar = (props) => {
                     </span>
                   </a>
 
-                  <a className="m-16 relative group " href="/DocCenter">
+                  <a className="m-16 relative group" href="/DocCenter">
                     <span
                       className={
                         location.pathname === "/DocCenter"
@@ -164,7 +164,7 @@ const PlusNavbar = (props) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-end items-center h-16">
+            <div className="flex justify-end items-center h-16 r-nav">
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   中IEN
@@ -411,6 +411,41 @@ const PlusNavbar = (props) => {
                 >
                   Documnet Center
                 </a>
+
+                <div className="flex justify-between w-full py-3">
+                  <div className="w-1/2 pr-1">
+                    <Dropdown>
+                      <Dropdown.Toggle id="dropdown-basic">
+                        中IEN
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1">EN</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">繁</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">簡</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
+                  <img
+                    className="w-8 h-8 rounded-full"
+                    src={user}
+                    width="32"
+                    height="32"
+                    alt="User"
+                  />
+                  <div className="w-1/2 pl-1">
+                    <Dropdown>
+                      <Dropdown.Toggle id="dropdown-basic">
+                        {props.username}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1">Setting</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">
+                          Sign Out
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
+                </div>
               </div>
             </div>
           )}

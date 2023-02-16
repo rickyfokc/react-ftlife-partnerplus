@@ -5,6 +5,10 @@ module.exports = {
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      md: "960px",
+      // => @media (min-width: 960px) { ... }
+    },
     extend: {
       colors: {
         primary: "#ef4123",
