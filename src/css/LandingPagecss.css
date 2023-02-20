@@ -1,0 +1,12 @@
+.test{
+    width:95%;
+    border-radius: 3px;
+    padding: 15px;
+    background: linear-gradient(60deg,#EF4123,#EF6A53);
+    -webkit-box-shadow: 0 12px 20px -10px rgb(255 66 0 / 28%), 0 4px 20px 0 rgb(0 0 0 / 12%), 0 7px 8px -5px rgb(255 38 0 / 20%);
+    box-shadow: 0 12px 20px -10px rgb(255 66 0 / 28%), 0 4px 20px 0 rgb(0 0 0 / 12%), 0 7px 8px -5px rgb(255 38 0 / 20%);
+}
+
+.rounded{
+    height: 95%;
+}
